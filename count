@@ -1,0 +1,34 @@
+#!/bin/bash
+
+RANGE=100
+number=$RANDOM
+count=0
+
+let "number %= $RANGE"
+
+echo "rand= $number"
+
+echo "Введите загаданное число от 0 до 100"
+read input_number
+
+ while [[ $number -ne $input_number ]]
+ do
+ (( count++ ))
+ echo "Попытка №$count"
+        if [[ $count -lt 3 ]]
+        then
+                if [[ $number -gt $input_number ]];
+                    then
+                        echo "Попробуйте >"
+                        read input_number
+                else
+                        echo "Попробуйте <"
+                         read input_number
+                fi
+        else
+        echo "К сожалению у Вас не осталось попыток"
+        exit 0
+        fi
+ done
+ echo "Вы угадали"
+ exit 0
